@@ -64,5 +64,5 @@ function man()
         command man -F -a "$i"
     done
 }
-PATH=$PATH:/usr/local/mysql-5.5.9-osx10.6-x86_64/bin:.
+PATH=$PATH:/usr/local/mysql-5.5.9-osx10.6-x86_64/bin:.:~/bin
 export PATH
