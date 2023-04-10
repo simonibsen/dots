@@ -1,15 +1,14 @@
-syntax on
-set cindent
+" set cindent
 set paste
 "set foldmethod=indent
 " Wrap too long lines
 set wrap
 
 " Tabs are 2 characters
-"set tabstop=2
+set tabstop=2
 
 " (Auto)indent uses 2 characters
-set shiftwidth=5
+set shiftwidth=2
 
 " spaces instead of tabs
 set expandtab
@@ -38,7 +37,7 @@ set hlsearch
 set incsearch
 
 " ignore case while searching
-set ignorecase
+" set ignorecase
 
 " don't wrap words
 set textwidth=0
@@ -61,20 +60,11 @@ set showmatch
 " write before hiding a buffer
 set autowrite
 
-" allows hidden buffers to stay unsaved, but we do not want this, so comment
-" it out:
-"set hidden
-
-"set wmh=0
-
 " auto-detect the filetype
 filetype plugin indent on
 
 " syntax highlight
 syntax on
-
-" we use a dark background, don't we?
-"set bg=dark
 
 " Always show the menu, insert longest match
 set completeopt=menuone,longest
