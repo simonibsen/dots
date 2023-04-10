@@ -103,13 +103,13 @@ iploc() {
   if [ "$new_location" == "California" ] ; then
     new_location="$GREEN$new_location$NC"
     PS1_BASE=${PS1_BASE:-"$PS1"}
-    PS1_LOCATION="[Loc: $new_location $LOCATION_COUNTER/$LOCATION_COUNTER_MAX $FETCH_COUNTDOWN]"
+    PS1_LOCATION="[Loc: $new_location $LOCATION_COUNTER/$LOCATION_COUNTER_MAX]"
     PS1="$PS1_LOCATION$PS1_BASE"
     return
   else
     new_location="$FLASHING$RED$new_location$NC$NF"
     PS1_BASE=${PS1_BASE:-"$PS1"}
-    PS1_LOCATION="[Loc: $new_location $LOCATION_COUNTER/$LOCATION_COUNTER_MAX $FETCH_COUNTDOWN]"
+    PS1_LOCATION="[Loc: $new_location $LOCATION_COUNTER/$LOCATION_COUNTER_MAX]"
     PS1="$PS1_LOCATION$PS1_BASE"
   fi
 }
