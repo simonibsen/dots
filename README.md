@@ -26,9 +26,12 @@ cd ~/src/dots && git pull                                 # update
   sources at the end and which is **never committed**. Same shared-plus-local
   pattern as `CLAUDE.md` + `CLAUDE.local.md`.
 - **`.vimrc`** — general vim config.
+- **`.gitconfig`** — general git config + signing settings. Identity is
+  **fail-closed** (no global name/email — set per-repo), so nothing identifying
+  is here. Machine/work-specific overrides go in `~/.gitconfig.local` (included
+  at the end, not committed).
 
 ## Not yet managed
 
-- **`.gitconfig`** — currently a standalone `$HOME` file (holds signing /
-  fail-closed settings). `.gitconfig.personal` is an orphan pending a decision on
-  wiring it via `[includeIf]`.
+- **`.gitconfig.personal`** — orphan (holds a bare email, nothing includes it).
+  Contradicts the fail-closed model; decide whether to delete it or repurpose.
