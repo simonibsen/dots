@@ -18,9 +18,10 @@ DOTS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 # Files to link:  $HOME/<path>  ->  $DOTS/<path>
-# NOTE: .bashrc and .vimrc are intentionally omitted — they have drifted from
-# $HOME and need a reconciliation decision first (see README).
+# .bashrc is the general/public part; machine-local bits are sourced from
+# ~/.bashrc.local (not tracked). .vimrc is still omitted pending reconciliation.
 MANIFEST=(
+  .bashrc
   .claude/CLAUDE.md
   .claude/statusline-command.sh
   .claude/subagent-statusline.sh

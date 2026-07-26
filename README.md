@@ -21,11 +21,13 @@ cd ~/src/dots && git pull                                 # update
   `CLAUDE.local.md`, `metrics/`) are intentionally **not** tracked, so work and
   home machines don't interfere. Env-specific instructions go in
   `~/.claude/CLAUDE.local.md` (imported by the shared `CLAUDE.md`).
+- **`.bashrc`** — the general part. Machine/work-specific bits (paths, work
+  1Password/AWS, etc.) live in `~/.bashrc.local`, which the shared `.bashrc`
+  sources at the end and which is **never committed**. Same shared-plus-local
+  pattern as `CLAUDE.md` + `CLAUDE.local.md`.
 
 ## Not yet linked (drift — reconcile before adding to install.sh)
 
-- **`.bashrc`** — `$HOME` copy is newer/richer than the repo copy.
-- **`.vimrc`** — the repo copy is richer than the `$HOME` stub.
-
-Decide which side is canonical, sync it into the repo, then add the file to the
-`MANIFEST` in `install.sh`.
+- **`.vimrc`** — the repo copy (79 lines) is richer than the `$HOME` stub
+  (`syntax on`). Decide which side is canonical, sync it into the repo, then add
+  it to the `MANIFEST` in `install.sh`.
