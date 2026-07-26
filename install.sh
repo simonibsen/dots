@@ -23,6 +23,7 @@ BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 MANIFEST=(
   .bashrc
   .vimrc
+  .gitconfig
   .claude/CLAUDE.md
   .claude/statusline-command.sh
   .claude/subagent-statusline.sh

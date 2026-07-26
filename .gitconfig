@@ -1,0 +1,25 @@
+[user]
+	useConfigOnly = true
+[log]
+	abbrevCommit = yes
+[credential]
+	helper = osxkeychain
+[pull]
+	rebase = false
+[push]
+	default = simple
+[rebase]
+	autosquash = true
+[core]
+	abbrev = 8
+	editor = vim
+[color]
+	ui = false
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+[include]
+	path = ~/.gitconfig.local
