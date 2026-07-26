@@ -19,9 +19,10 @@ BACKUP="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
 # Files to link:  $HOME/<path>  ->  $DOTS/<path>
 # .bashrc is the general/public part; machine-local bits are sourced from
-# ~/.bashrc.local (not tracked). .vimrc is still omitted pending reconciliation.
+# ~/.bashrc.local (not tracked).
 MANIFEST=(
   .bashrc
+  .vimrc
   .claude/CLAUDE.md
   .claude/statusline-command.sh
   .claude/subagent-statusline.sh

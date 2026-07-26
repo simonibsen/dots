@@ -1,6 +1,5 @@
 " set cindent
 set paste
-"set foldmethod=indent
 " Wrap too long lines
 set wrap
 
@@ -21,8 +20,6 @@ set wildchar=<Tab>
 
 " show line numbers
 " set number
-
-set foldmethod=indent
 
 " enable all features
 set nocompatible
