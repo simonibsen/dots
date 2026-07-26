@@ -30,8 +30,3 @@ cd ~/src/dots && git pull                                 # update
   **fail-closed** (no global name/email — set per-repo), so nothing identifying
   is here. Machine/work-specific overrides go in `~/.gitconfig.local` (included
   at the end, not committed).
-
-## Not yet managed
-
-- **`.gitconfig.personal`** — orphan (holds a bare email, nothing includes it).
-  Contradicts the fail-closed model; decide whether to delete it or repurpose.
