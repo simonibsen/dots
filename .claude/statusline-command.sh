@@ -49,22 +49,27 @@ printf "%s@%s %s %b%s%b%s%b" \
 txtdim="\e[2m"
 # Threshold colors for usage %s (scheme B: green<65 / yellow / red>=90).
 # Real ESC bytes ($'...') so they survive %s printing of $seg below.
-c_rst=$'\033[0m'; c_lo=$'\033[32m'; c_md=$'\033[33m'; c_hi=$'\033[31m'
+c_rst=$'\033[0m'; c_dim=$'\033[2m'; c_lo=$'\033[32m'; c_md=$'\033[33m'; c_hi=$'\033[31m'
 pctcol() {  # $1 = integer percent -> emit the severity color
     if   [ "$1" -ge 90 ]; then printf '%s' "$c_hi"
     elif [ "$1" -ge 65 ]; then printf '%s' "$c_md"
     else printf '%s' "$c_lo"; fi
 }
-seg=""
-[ -n "$model" ] && seg="$model"
+# Session-scoped trio: model · context% · cost
+sess=""
+[ -n "$model" ] && sess="$model"
 if [ -n "$ctx" ]; then
     ctx_i=$(printf '%.0f' "$ctx" 2>/dev/null)
-    [ -n "$ctx_i" ] && seg="${seg:+$seg }$(pctcol "$ctx_i")${ctx_i}%${c_rst}"
+    [ -n "$ctx_i" ] && sess="${sess:+$sess }$(pctcol "$ctx_i")${ctx_i}%${c_rst}"
 fi
 if [ -n "$cost" ]; then
     cost_f=$(printf '$%.2f' "$cost" 2>/dev/null)
-    [ -n "$cost_f" ] && seg="${seg:+$seg }${cost_f}"
+    [ -n "$cost_f" ] && sess="${sess:+$sess }${cost_f}"
 fi
+# Bracket the session trio (dim brackets) to set it apart from the
+# account-scoped plan usage, which stays OUTSIDE the brackets.
+seg=""
+[ -n "$sess" ] && seg="${c_dim}[${c_rst}${sess}${c_dim}]${c_rst}"
 # Plan usage: 5-hour and 7-day rate-limit windows (absent on API billing → skipped)
 if [ -n "$five" ]; then
     five_i=$(printf '%.0f' "$five" 2>/dev/null)
