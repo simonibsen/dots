@@ -25,9 +25,10 @@ cd ~/src/dots && git pull                                 # update
   1Password/AWS, etc.) live in `~/.bashrc.local`, which the shared `.bashrc`
   sources at the end and which is **never committed**. Same shared-plus-local
   pattern as `CLAUDE.md` + `CLAUDE.local.md`.
+- **`.vimrc`** — general vim config.
 
-## Not yet linked (drift — reconcile before adding to install.sh)
+## Not yet managed
 
-- **`.vimrc`** — the repo copy (79 lines) is richer than the `$HOME` stub
-  (`syntax on`). Decide which side is canonical, sync it into the repo, then add
-  it to the `MANIFEST` in `install.sh`.
+- **`.gitconfig`** — currently a standalone `$HOME` file (holds signing /
+  fail-closed settings). `.gitconfig.personal` is an orphan pending a decision on
+  wiring it via `[includeIf]`.
