@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# prepare-commit-msg — keep the Claude Co-Authored-By trailer honest.
+#
+# When a commit message carries a "Co-Authored-By: Claude ..." line (i.e. a
+# Claude-made commit), rewrite it to name the model actually running the
+# session, resolved from the Claude Code session transcript. This corrects the
+# hardcoded model name Claude emits from its base instructions, which goes
+# stale whenever a session runs a different model.
+#
+# Safe by construction:
+#   - acts ONLY when a "Co-Authored-By: Claude" line is already present
+#   - human co-author lines are never touched
+#   - fail-open: any uncertainty (no session, no transcript, unknown model id)
+#     leaves the message exactly as-is and never blocks the commit
+set -u
+
+msg_file="${1:-}"
+[ -n "$msg_file" ] && [ -f "$msg_file" ] || exit 0
+
+# Nothing to do unless a Claude co-author line exists.
+grep -qiE '^Co-Authored-By: Claude' "$msg_file" || exit 0
+
+# Need the Claude Code session to know which model is running.
+sid="${CLAUDE_CODE_SESSION_ID:-}"
+[ -n "$sid" ] || exit 0
+
+# Most recent model id recorded in this session's transcript.
+transcript="$(find "$HOME/.claude/projects" -maxdepth 3 -type f -name "${sid}.jsonl" 2>/dev/null | head -1)"
+[ -n "$transcript" ] && [ -f "$transcript" ] || exit 0
+model_id="$(grep -oE '"model":"[^"]*"' "$transcript" 2>/dev/null | tail -1 | sed -E 's/.*"model":"([^"]*)".*/\1/')"
+[ -n "$model_id" ] || exit 0
+case "$model_id" in claude-*) ;; *) exit 0 ;; esac
+
+# claude-opus-4-8 -> "Claude Opus 4.8"  |  claude-fable-5 -> "Claude Fable 5"
+x="${model_id%%[*}"                              # strip alias suffix e.g. [1m]
+x="${x#claude-}"
+x="$(printf '%s' "$x" | sed -E 's/-[0-9]{8}$//')" # strip trailing release date
+fam="${x%%-*}"
+ver="${x#*-}"; [ "$ver" = "$x" ] && ver=""
+fam="$(tr '[:lower:]' '[:upper:]' <<<"${fam:0:1}")${fam:1}"
+ver="${ver//-/.}"
+if [ -n "$ver" ]; then display="Claude $fam $ver"; else display="Claude $fam"; fi
+
+# Rewrite only Claude co-author lines; leave everything else intact.
+tmp="$(mktemp)" || exit 0
+if sed -E "s|^Co-Authored-By: Claude.*|Co-Authored-By: ${display} <noreply@anthropic.com>|" "$msg_file" >"$tmp" 2>/dev/null; then
+  cat "$tmp" >"$msg_file"
+fi
+rm -f "$tmp"
+exit 0

@@ -95,6 +95,13 @@ Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `build
 - **Blank line, then a body.** The body explains both **what** the change does and **why** it was needed. "How" is the diff — skip it.
 - Wrap body lines at 72 characters.
 - Trivial commits (formatting, rename, dep bump) can be a one-liner with no body.
+- **Co-author trailer names the live model.** When appending
+  `Co-Authored-By: Claude … <noreply@anthropic.com>`, use the display name of
+  the model actually running the session (e.g. `Claude Opus 4.8`), never a name
+  carried over from base instructions. If unsure of the exact display name,
+  derive it from the most recent `"model"` id in the session transcript. A
+  `prepare-commit-msg` hook (see the dots repo) normalizes this deterministically
+  as a backstop, but get it right in the message you write.
 
 Example:
 

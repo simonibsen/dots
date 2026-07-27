@@ -52,6 +52,13 @@ commit fails rather than silently using the wrong address.
   are intentionally not tracked so work and home machines don't interfere.
 - **`.vimrc`** — general vim config.
 - **`.gitconfig`** — general git config + SSH commit signing.
+- **`git-hooks/`** — git hooks deployed by `install.sh` (not `$HOME` symlinks):
+  each is linked into `~/.git_templates/hooks/` so new clones inherit it, and
+  into this repo's own `.git/hooks/`. `prepare-commit-msg` keeps the Claude
+  `Co-Authored-By` trailer naming the model actually running, resolved from the
+  Claude Code session transcript. `install.sh` never sets `core.hooksPath`
+  globally, so other repos' own hooks are untouched; existing repos pick the
+  hook up by re-running `git init` (re-applies the template).
 
 See [Shared + local split](#shared--local-split) for where the machine-specific
 half of `.bashrc`, `CLAUDE.md`, and `.gitconfig` lives.
