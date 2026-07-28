@@ -31,6 +31,55 @@ not as personal fault or hard-won experience. First-person action ("I'll fix
 it", "I changed X") is fine; it's the personified blame/feeling/experience
 framing to drop.
 
+## Code comments and committed docs
+
+Never put point-in-time measurements in code comments, config comments, or
+committed docs. They rot within weeks and then actively mislead, because nothing
+re-verifies them when the underlying system changes. This covers observed values
+and counts ("~413 hosts carry no cluster tag", "peak was 5.51%", "1 of ~4750
+groups exceeded this"), current-state claims ("there are 12 clusters", "this
+runs on 3 replicas"), and bare dates or "as of" qualifiers.
+
+Comment the **durable reason** instead — the invariant, the mechanism, or the
+constraint that will still hold after the numbers move:
+
+```hcl
+# BAD  — rots as soon as the fleet changes
+# Grouped by host, not kube_cluster_name -- ~413 non-EKS hosts carry no cluster tag.
+
+# GOOD — states why, and stays true
+# Grouped by host, not kube_cluster_name: much of the non-EKS fleet carries no
+# cluster tag, and a missing tag is not filterable, so those hosts would
+# silently collapse into a single group.
+```
+
+For a tuned threshold, say what it is set relative to and how to re-derive it —
+not the reading it came from.
+
+The measurements themselves are still worth recording; put them where they are
+inherently timestamped and never mistaken for current truth: the commit message,
+the PR description, or a linked ticket. Prefer making a value queryable or
+asserted in a test over describing it in prose.
+
+Two exceptions:
+
+- A comment describing the state of a *pinned, versioned* dependency is fine,
+  since it changes only when the pin does.
+- A measurement that gives a design decision its meaning is worth keeping
+  inline — a benchmark beside an optimization, a baseline that explains what
+  "fast" or "too big" meant when the threshold was chosen. Without it the
+  decision becomes unreadable and the next person cannot tell whether it still
+  holds. Frame it explicitly as a historical datum rather than current state,
+  and anchor it to something concrete so nobody mistakes it for a live value:
+
+  ```python
+  # 40ms -> 3ms on the 10k-row fixture (M2, Python 3.12) when this replaced the
+  # naive nested loop. Re-measure before assuming it still matters.
+  ```
+
+  The test is whether a reader would treat the number as *why this code looks
+  like this* (keep) or as *what the system currently does* (drop).
+
 ## Output formatting
 
 When using abbreviations in output (e.g., TSS, RPE, RUM, APM, MoM, WoW),
