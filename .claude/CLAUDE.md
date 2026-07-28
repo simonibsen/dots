@@ -80,6 +80,22 @@ Two exceptions:
   The test is whether a reader would treat the number as *why this code looks
   like this* (keep) or as *what the system currently does* (drop).
 
+## Cross-context references
+
+A reference that resolves correctly where you wrote it can silently resolve to something
+else where it is read. Two cases that bite:
+
+**Bare `#N` is repo-local.** In a GitHub PR body, issue, or comment, `#602` means issue or
+PR 602 *in the current repo*. Pointing at another repo needs `owner/repo#602` or a full
+URL. Get this wrong and it doesn't error — it links to an unrelated item that usually
+exists, which is worse than a broken link.
+
+**Relative links don't resolve in PR and issue bodies.** `./README.md` or `../docs/x.md`
+work in a rendered repo file but break in a PR description, an issue, or a PR template.
+Use full `https://github.com/owner/repo/...` URLs in those.
+
+When unsure, use the full URL. It is never wrong, only longer.
+
 ## Output formatting
 
 When using abbreviations in output (e.g., TSS, RPE, RUM, APM, MoM, WoW),
