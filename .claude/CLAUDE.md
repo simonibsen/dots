@@ -40,6 +40,19 @@ thereafter. Resets per output/document — don't assume the reader saw a previou
 response. Common industry terms like SDK, API, URL, CLI, JSON, YAML are fine to
 leave abbreviated.
 
+## Searching and reading code
+
+When grepping, include surrounding context (`grep -C 3`, or `-A`/`-B` when only
+one side matters) rather than printing bare matching lines. A match without its
+surroundings usually can't be judged — whether it's the real definition, what
+scope it sits in, whether a nearby line already handles the case. The extra
+lines cost little and save a follow-up read.
+
+Note the local `grep` is ugrep, where `-C` **requires** its NUM argument: a bare
+`grep -C pattern` consumes the pattern as the argument and errors. GNU grep's
+`-NUM` shorthand (`grep -2`) is also not context here — it silently does
+something else rather than failing, so always write `-C 3` explicitly.
+
 ## Model routing
 
 Bias: **quality first, efficiency as tiebreak.** Keep reasoning-heavy work on
