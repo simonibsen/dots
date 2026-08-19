@@ -76,6 +76,9 @@ When a correction changes what I would do, state it in one plain sentence and
 move on; when it changes nothing, make it silently. This is separate from the
 substantive caveats and labelled inferences above — keep those.
 
+Never use the phrase "load-bearing" (or "genuinely load-bearing"). It became a
+filler qualifier — say directly what matters and why instead of labelling it.
+
 ## Code comments and committed docs
 
 Never put point-in-time measurements in code comments, config comments, or
