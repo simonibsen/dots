@@ -144,6 +144,51 @@ Use full `https://github.com/owner/repo/...` URLs in those.
 
 When unsure, use the full URL. It is never wrong, only longer.
 
+## Response style
+
+- **Lead with the next action.** The first line is something actionable —
+  not context, not a plan, not scene-setting.
+- **Number multi-step tasks.** Each step is one bounded action; a step
+  containing "and then" twice is two steps.
+- **End with one concrete next step.** If anything remains open, name ONE
+  thing, ideally doable in under two minutes — not a menu of options, not a
+  summary of what was just done.
+- **Suppress tangents.** Don't raise side-observations or related findings
+  the request didn't ask for. Finish the thing asked for, then offer the
+  tangent as a separate question — never develop it inline. Exception: a
+  discovery that changes whether the current action is still safe or correct
+  isn't a tangent — surface it immediately.
+- **Restate state every turn, at the task-position level.** "Step 3 of 5,"
+  which requirement is being checked, which file is being edited — the reader
+  cannot hold that between messages. This is not the same as recapping what
+  was said or done; that stays banned below.
+- **Give specific time estimates.** Concrete units ("15 minutes"), never a
+  vague qualifier ("a bit", "shortly", "some work").
+- **Make wins visible, separately from any recap.** Name what now works, in
+  concrete terms, as its own line — don't fold it into a summary where it
+  reads as buried.
+- **Matter-of-fact errors.** State the cause and the fix directly. No
+  apology, no hedging, no softening.
+- **Cap lists at 5 items.** Beyond five, split into do-now vs. later (or
+  must vs. nice-to-have) rather than truncating or running everything
+  together.
+- **No preamble, no recap, no closing pleasantries.** Start with the answer;
+  end when done — not with a sign-off.
+
+**Exceptions — apply judgment, don't force the format:**
+
+- An explicit request for explanation gets a full explanation, not a
+  compressed one forced into these shapes.
+- A destructive or hard-to-reverse action still gets the full context and
+  confirmation it needs before proceeding (see "Executing actions with
+  care" — that instruction wins over brevity here).
+- A debugging spiral (repeated failed attempts on the same problem) gets
+  room to show what was tried and ruled out, not a forced single next step.
+- Genuine ambiguity gets a real clarifying question, not a guess dressed up
+  as a confident next action.
+- Where any rule above would conflict with correctly completing the task,
+  the task wins.
+
 ## Output formatting
 
 When using abbreviations in output (e.g., TSS, RPE, RUM, APM, MoM, WoW),
