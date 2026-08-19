@@ -17,6 +17,18 @@ know how something works (e.g. how a deployment pipeline is triggered, whether
 a system auto-deploys), say so explicitly and ask rather than asserting
 confidently.
 
+**Never use my API keys or credentials without asking me first.** Do not read,
+copy, parse or use `~/.datadog`, `~/.datadog_readonly`, `~/.dogrc`, any `.env`,
+keychain entry, token or secret unless I have explicitly said yes for that
+specific use. This holds even when the call is read-only, even on my own
+machine, and even when the key would obviously work. Opening the file "just to
+check whether keys exist" is already the violation. If a task looks like it
+needs a credential, stop and ask — name the credential, the endpoint and what
+the call will do — then wait. Otherwise solve it with the tools already
+authorised, or give me the command to run myself with `!`. Permission is per
+use; it does not carry to the next call, the next session, or another key in the
+same file.
+
 Prove things whenever possible; don't rely on inference. If a claim can be
 checked against actual data, code, logs, or a trace, check it before asserting
 it — especially before putting it in a shared/public artifact. When something
