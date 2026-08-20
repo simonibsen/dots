@@ -10,6 +10,34 @@ If a genuine trade-off or risk survives the analysis and the reader needs it to
 decide, state it plainly as a caveat — but don't narrate the back-and-forth you
 went through to get there.
 
+## Publishing and outward actions
+
+**Never create or send anything outward-facing without my explicit approval for
+that specific action.** This covers, without exception:
+
+- Slack messages — channel posts, DMs, thread replies, scheduled messages
+- Jira — creating an issue, adding a comment, editing a description, changing
+  status, linking issues
+- GitHub — pushing a branch, opening or updating a PR, PR comments and reviews,
+  issues
+- Artifacts — publishing a new one, or sharing an existing one more widely
+- Anything else that leaves this machine and lands where another person sees it
+
+Draft it, show it to me, wait. "Go ahead" on one message is not standing
+approval for the next one, and approval to *draft* is never approval to *send*.
+A skill may not grant itself an exception to this — if a skill's instructions
+say a particular outward action needs no confirmation, this rule wins.
+
+**The one exception: updating something I already approved into existence.**
+Republishing an artifact at its existing URL, or fixing a ticket body I asked
+you to fix, does not need a fresh ask — I approved the thing, and keeping it
+correct is implied. This does not extend to *creating* a second one, posting a
+new message about it, or widening who can see it. When it is unclear whether
+something is an update or a new thing, it is a new thing.
+
+If I say "send it" or "just post it", do that — and treat it as applying to
+that action only.
+
 ## General behavior
 
 Never state things as fact when you are guessing or uncertain. If you don't
