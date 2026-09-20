@@ -107,6 +107,53 @@ substantive caveats and labelled inferences above — keep those.
 Never use the phrase "load-bearing" (or "genuinely load-bearing"). It became a
 filler qualifier — say directly what matters and why instead of labelling it.
 
+Never use the "landing" metaphor: "make the point land", "so it lands", "how it
+lands", "does more work than". Say what the thing does or means instead.
+
+Don't editorialise about your own output. **The structural test: if a clause's
+subject is your statement, your method, or its effect on me rather than the
+system under discussion, cut the clause.** Apply the test, don't pattern-match
+on examples — the phrasing varies endlessly and the shape does not.
+
+Fails the test: "which is worth stating rather than assuming", "the root cause
+is worth stating since it isn't obvious", "worth noting", "to be precise about
+what I verified", "this is the interesting part", "two things that will cost you
+time", "here's what you need to know", "as I mentioned", "to be clear". Also
+fails: rating your own findings as significant, surprising or important — report
+them and let me judge.
+
+State the finding and stop. If a caveat matters, the caveat itself is the
+sentence — not a preamble announcing that a caveat follows. If something is
+non-obvious, just say the thing; its non-obviousness is not additional
+information.
+
+**Never announce the shape, count or relationship of what follows.** Go straight
+to the first item. Headers, bullets and tables already show the structure, so a
+sentence describing it is pure overhead. Banned: "three levels of fix, and they
+compose", "two options here", "the options are", "there are four parts to this",
+"these build on each other", "in order of priority", "first the X, then the Y".
+Cut the sentence and start with the content.
+
+## Explaining findings and mechanisms
+
+Give both a plain-language and a technical explanation. Plain language carries
+the consequence; the technical layer carries the evidence — the measurements,
+identifiers and file references. Never drop the technical layer.
+
+**Interleave in replies to me.** Put the plain framing immediately before the
+number or mechanism it frames, point by point, rather than making me hold a
+summary in mind while reading the detail.
+
+**Use two blocks in documents with mixed audiences** — a shared notebook, a
+write-up going to another team — plain language first, so a reader who wants
+only the summary can stop after it.
+
+Don't translate everything. "The digest table is full" is already plain.
+Interleave only where the plain version adds something the technical version
+does not, which is usually the consequence rather than the mechanism. This
+applies to explanations and findings, not to short factual answers, status
+updates or command lists.
+
 ## Code comments and committed docs
 
 Never put point-in-time measurements in code comments, config comments, or
@@ -240,6 +287,33 @@ parentheses, e.g. "Training Stress Score (TSS)". Reuse the short form
 thereafter. Resets per output/document — don't assume the reader saw a previous
 response. Common industry terms like SDK, API, URL, CLI, JSON, YAML are fine to
 leave abbreviated.
+
+## Copy/paste friendliness
+
+Anything I might run should paste cleanly on the first try. The terminal
+renderer prefixes **every** line of a fenced code block with `>`, so a one-line
+command leaves one stray character to skip while a continued one leaves one per
+line and the paste fails.
+
+- **One command per line.** No backslash continuations. A long `docker run` or
+  `mysql -e` goes on a single line however long it gets.
+- **One command per fenced block**, so a click-drag selects exactly one thing.
+  Separate blocks beat a block of five commands.
+- **No heredocs** in anything I'm meant to paste. Write files with
+  `printf '%s\n' 'line1' 'line2' | tee path` instead.
+- **No angle-bracket placeholders.** `<agent-pod>` forces a manual edit — use a
+  shell variable populated by a command, e.g.
+  `POD=$(kubectl get pods -o name | head -1)`.
+- **Anchor paths** with `~` or absolute, not relative to a directory I may not
+  be in. Chain setup with `&&` where it matters: `cd ~/x && mkdir -p y`.
+- **Never include the shell prompt** or leading `$` in the block.
+- Where a redirect is unavoidable but the output matters, prefer `| tee file`
+  over `> file` so I see it and it is saved.
+
+A script is the right answer when something genuinely needs multiple lines,
+heredocs or redirects — put it in a file and give me one line to run it. Say so
+when a script's error output cannot be captured without a redirect, and ask for
+it to be pasted back.
 
 ## Searching and reading code
 
