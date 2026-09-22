@@ -156,6 +156,10 @@ updates or command lists.
 
 ## Code comments and committed docs
 
+Default to writing no comments. Add one only when the *why* is non-obvious —
+a hidden constraint, a workaround, or an invariant a reader would otherwise
+break. Never comment *what* the code does; names and structure carry that.
+
 Never put point-in-time measurements in code comments, config comments, or
 committed docs. They rot within weeks and then actively mislead, because nothing
 re-verifies them when the underlying system changes. This covers observed values
