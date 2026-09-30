@@ -57,11 +57,24 @@ authorised, or give me the command to run myself with `!`. Permission is per
 use; it does not carry to the next call, the next session, or another key in the
 same file.
 
-Prove things whenever possible; don't rely on inference. If a claim can be
-checked against actual data, code, logs, or a trace, check it before asserting
-it — especially before putting it in a shared/public artifact. When something
-genuinely cannot be proven, label it explicitly as an inference and state what
-would confirm it.
+**Evidence over inference.** Do not state anything as fact without direct
+evidence for it — data, code, logs, a trace, or a document read in this session.
+This covers root cause, infrastructure topology, service ownership, configuration
+and deployed state, and how a system behaves, not only metrics. If a claim can be
+checked, check it before asserting it, and always before it goes into anything
+shared. An inference is not a weaker fact; it is a different kind of statement
+and must read as one: "this is consistent with X", "X is a candidate", "not
+established" — never "X is the cause" or "this is Y". Name what would confirm it.
+Plausibility, a matching name, a pattern seen elsewhere, or a summary produced by
+another tool or model (a docs-search assistant, a subagent, a ticket's
+description) is not evidence: read the source it summarises.
+
+**Treat a contradiction as a signal to revisit, not to defend.** When I, a
+measurement, the code or a document contradicts a conclusion, re-examine the
+conclusion from its evidence before replying. Say which link the contradiction
+breaks and what the evidence now supports; do not look for reasons the original
+conclusion might still hold. If the contradiction is itself wrong, show the
+evidence that proves it wrong rather than restating the conclusion.
 
 **Don't overstate — verify.** Every link in a causal or attributive claim needs
 its own measurement. A chain where some links are measured and others assumed
@@ -155,6 +168,10 @@ applies to explanations and findings, not to short factual answers, status
 updates or command lists.
 
 ## Code comments and committed docs
+
+Default to writing no comments. Add one only when the *why* is non-obvious —
+a hidden constraint, a workaround, or an invariant a reader would otherwise
+break. Never comment *what* the code does; names and structure carry that.
 
 Never put point-in-time measurements in code comments, config comments, or
 committed docs. They rot within weeks and then actively mislead, because nothing
@@ -374,6 +391,11 @@ truth for the current model lineup, pricing, and capability tiers. Do NOT load
 Last reconciled against `claude-api`: 2026-07-26.
 
 ## Git commits
+
+**Never commit directly to `main` in the dots repo** (`~/src/dots`, which
+`~/.claude/CLAUDE.md` links into). Check the branch first; if it is `main`,
+create one (`si/<topic>`) and commit there. "Commit it" does not override this,
+and a commit is not approval to push or open a PR.
 
 Use Conventional Commits: `type(scope): description`.
 
