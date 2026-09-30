@@ -392,6 +392,11 @@ Last reconciled against `claude-api`: 2026-07-26.
 
 ## Git commits
 
+**Never commit directly to `main` in the dots repo** (`~/src/dots`, which
+`~/.claude/CLAUDE.md` links into). Check the branch first; if it is `main`,
+create one (`si/<topic>`) and commit there. "Commit it" does not override this,
+and a commit is not approval to push or open a PR.
+
 Use Conventional Commits: `type(scope): description`.
 
 Common types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `perf`, `build`, `ci`.
